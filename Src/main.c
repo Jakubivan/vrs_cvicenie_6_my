@@ -1,22 +1,4 @@
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
+//JAKUB IVAN zadanie VRS
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -25,6 +7,7 @@
 #include "usart.h"
 #include "lis3mdltr.h"
 #include "lsm6dsl.h"
+#include "hts221.h"
 #include "stdio.h"
 #include "string.h"
 #include "dma.h"
@@ -57,10 +40,10 @@ int main(void)
   {
 
 	  //os			   x      y        z
-	  lsm6dsl_get_acc(acc, (acc+1), (acc+2)); //volanie hlavnej funkcie
-	  memset(formated_text, '\0', sizeof(formated_text));
-	  sprintf(formated_text, "%0.4f,%0.4f,%0.4f\r", acc[0], acc[1], acc[2]);
-	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
+//	  lsm6dsl_get_acc(acc, (acc+1), (acc+2)); //volanie hlavnej funkcie
+//	  memset(formated_text, '\0', sizeof(formated_text));
+//	  sprintf(formated_text, "%0.4f,%0.4f,%0.4f\r", acc[0], acc[1], acc[2]);
+//	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 	  LL_mDelay(10);
   }
 }
