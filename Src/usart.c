@@ -102,9 +102,3 @@ void USART2_PutBuffer(uint8_t *buffer, uint8_t length)
 }
 
 
-
-/* USER CODE BEGIN 1 */
-
-/* USER CODE END 1 */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
