@@ -14,10 +14,10 @@
 
 #define 	HTS221_DEVICE_ADDRESS				0xBF 	//adresa read SLAVE
 
-#define 	HTS221_WHO_AM_I_VALUE				0x0F
-#define 	HTS221_WHO_AM_I_ADDRESS				0xBC
+#define 	HTS221_WHO_AM_I_VALUE				0xBC
+#define 	HTS221_WHO_AM_I_ADDRESS				0x0F
 
-#define 	HTS221_ADDRESS_CTRL1				0x10	// kontrolny register, konfiguracia slave zariadenia
+#define 	HTS221_ADDRESS_CTRL1				0x20	// kontrolny register, konfiguracia slave zariadenia
 
 #define 	HTS221_ADDRESS_TEMP_OUT_L			0x2A	// TEMP_OUT_L temperature data lsb
 #define 	HTS221_ADDRESS_TEMP_OUT_H			0x2B	// TEMP_OUT_H temperature data MSB

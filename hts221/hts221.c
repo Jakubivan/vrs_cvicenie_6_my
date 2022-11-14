@@ -39,5 +39,25 @@ void hts221_get_temp(float* temp_result)
 
 uint8_t hts221_init(void)
 {
+	uint8_t status = 1;
 
+		LL_mDelay(100);
+
+		uint8_t val = hts221_read_byte(HTS221_WHO_AM_I_ADDRESS);
+
+		if(val == HTS221_WHO_AM_I_VALUE)
+		{
+			status = 1;
+		}
+		else			//if the device is not found on one address, try another one
+		{
+			status = 0;
+		}
+
+		//hts221 device config
+		uint8_t ctrl1 = hts221_read_byte(HTS221_ADDRESS_CTRL1);
+		ctrl1 &= ~0x7E; //10000001
+		hts221_write_byte(HTS221_ADDRESS_CTRL1, ctrl1);
+
+		return status;
 }

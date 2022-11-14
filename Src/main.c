@@ -35,6 +35,7 @@ int main(void)
   MX_USART2_UART_Init();
 
   lsm6dsl_init();
+  hts221_init();
 
   while (1)
   {
