@@ -15,7 +15,9 @@
 #define CHAR_BUFF_SIZE	30
 
 float mag[3], acc[3];
-char formated_text[30];
+float temperature;
+int humidity;
+char formated_text[60];
 
 void SystemClock_Config(void);
 
@@ -35,9 +37,16 @@ int main(void)
   MX_USART2_UART_Init();
 
   lsm6dsl_init();
+  hts221_init();
 
   while (1)
   {
+
+	  hts221_get_temp(&temperature); //volanie hlavnej funkcie
+	  hts221_get_hum(&humidity); //volanie hlavnej funkcie
+	  memset(formated_text, '\0', sizeof(formated_text));
+	  sprintf(formated_text, "teplota [°C]: %0.1f, rel vlhkost [%%]: %d\r", temperature, humidity);
+	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 
 	  //os			   x      y        z
 //	  lsm6dsl_get_acc(acc, (acc+1), (acc+2)); //volanie hlavnej funkcie
