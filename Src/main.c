@@ -15,6 +15,7 @@
 #define CHAR_BUFF_SIZE	30
 
 float mag[3], acc[3];
+float temperature;
 char formated_text[30];
 
 void SystemClock_Config(void);
@@ -39,6 +40,11 @@ int main(void)
 
   while (1)
   {
+
+	  hts221_get_temp(&temperature); //volanie hlavnej funkcie
+	  memset(formated_text, '\0', sizeof(formated_text));
+	  sprintf(formated_text, "%0.1f\r", temperature);
+	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 
 	  //os			   x      y        z
 //	  lsm6dsl_get_acc(acc, (acc+1), (acc+2)); //volanie hlavnej funkcie
