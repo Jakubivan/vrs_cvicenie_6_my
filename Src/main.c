@@ -18,9 +18,9 @@
 float mag[3], acc[3];
 float temperature;
 float pressure;
+float rel_height;
 int humidity;
-float ttt;
-char formated_text[70];
+char formated_text[110];
 
 void SystemClock_Config(void);
 
@@ -49,8 +49,9 @@ int main(void)
 	  hts221_get_temp(&temperature);
 	  hts221_get_hum(&humidity);
 	  lps25hb_get_press(&pressure);
+	  lps25hb_get_rel_height(&rel_height);
 	  memset(formated_text, '\0', sizeof(formated_text));
-	  sprintf(formated_text, "teplota [°C]: %0.1f, rel vlhkost [%%]: %d, tlak vzduchu [hPa]: %.2f\r", temperature, humidity, pressure);
+	  sprintf(formated_text, "teplota [°C]: %0.1f,  rel vlhkost [%%]: %d,  tlak vzduchu [hPa]: %.2f,  rel_h [m]: %.2f \r", temperature, humidity, pressure, rel_height);
 	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 
 	  LL_mDelay(10);

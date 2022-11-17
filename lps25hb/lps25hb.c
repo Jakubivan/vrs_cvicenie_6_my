@@ -24,7 +24,10 @@
 #include "lps25hb.h"
 
 uint8_t addres_lsp25hb = LPS25HB_DEVICE_ADDRESS1;
-float p0;
+float p0 = 1013.25;
+float p_act;
+float t_act;
+float h0;
 float p1;
 
 uint8_t lps25hb_read_byte(uint8_t reg_addr)
@@ -66,7 +69,23 @@ void lps25hb_get_temp(float* lps25hb_temp)
 	uint8_t lps25hb_temp_array[2];
 	lps25hb_temp_array[0] = lps25hb_read_byte(LPS25HB_ADDRESS_TEMP_OUT_L);
 	lps25hb_temp_array[1] = lps25hb_read_byte(LPS25HB_ADDRESS_TEMP_OUT_H);
-	*lps25hb_temp = (lps25hb_temp_array[1] << 8) | lps25hb_temp_array[0];
+	*lps25hb_temp = (float)((lps25hb_temp_array[1] << 8) | lps25hb_temp_array[0])/100;
+}
+
+void lps25hb_get_rel_height(float* rel_height)
+{
+	float h_act;
+	lps25hb_get_abs_height(&h_act);
+
+	*rel_height = (float)(h_act - h0);
+}
+void lps25hb_get_abs_height(float* abs_height)
+{
+
+	lps25hb_get_press(&p_act);
+	lps25hb_get_temp(&t_act);
+
+	*abs_height = (float)( (pow((p0/p_act),(1/5.257)) - 1.0) * (t_act+273.15) )/0.0065;
 }
 
 uint8_t lps25hb_init(void)
@@ -98,11 +117,11 @@ uint8_t lps25hb_init(void)
 	// device config
 	uint8_t ctrl1 = lps25hb_read_byte(LPS25HB_ADDRESS_CTRL1);
 	ctrl1 &= ~0xFF;
-	ctrl1 |=  0x18;
+	ctrl1 |=  0x28; //10hz
 	lps25hb_write_byte(LPS25HB_ADDRESS_CTRL1, ctrl1);
 
-	// ziskanie pociatocneho tlaku p0 pri inicializacii zariadenia
-	lps25hb_get_press(&p0);
+	// vypocet vysky od mora -> pri inicializacii
+	lps25hb_get_abs_height(&h0);
 
 	return status;
 }

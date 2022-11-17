@@ -10,6 +10,7 @@
 
 #include "main.h"
 #include "i2c.h"
+#include <math.h>
 
 
 #define 	LPS25HB_DEVICE_ADDRESS1				0xB9 	//adresa1 read SLAVE
@@ -31,6 +32,8 @@
 uint8_t lps25hb_init(void);
 void lps25hb_get_temp(float* lps25hb_temp);
 void lps25hb_get_press(float* press_out);
+void lps25hb_get_rel_height(float* rel_height);
+void lps25hb_get_abs_height(float* abs_height);
 uint8_t lps25hb_read_byte(uint8_t reg_addr);
 void lps25hb_write_byte(uint8_t reg_addr, uint8_t value);
 
