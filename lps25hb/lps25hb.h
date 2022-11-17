@@ -28,6 +28,12 @@
 #define 	LPS25HB_ADDRESS_TEMP_OUT_L			0x2B // prvy register
 #define 	LPS25HB_ADDRESS_TEMP_OUT_H			0x2C // druhy register
 
+uint8_t lps25hb_init(void);
+void lps25hb_get_temp(float* lps25hb_temp);
+void lps25hb_get_press(float* press_out);
+uint8_t lps25hb_read_byte(uint8_t reg_addr);
+void lps25hb_write_byte(uint8_t reg_addr, uint8_t value);
+
 
 
 

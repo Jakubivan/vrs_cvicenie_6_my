@@ -8,6 +8,7 @@
 #include "lis3mdltr.h"
 #include "lsm6dsl.h"
 #include "hts221.h"
+#include "lps25hb.h"
 #include "stdio.h"
 #include "string.h"
 #include "dma.h"
@@ -38,6 +39,7 @@ int main(void)
 
   lsm6dsl_init();
   hts221_init();
+  lps25hb_init();
 
   while (1)
   {
