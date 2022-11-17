@@ -8,7 +8,7 @@
 #include "lis3mdltr.h"
 #include "lsm6dsl.h"
 #include "hts221.h"
-#include "lps25hb.h"
+#include "lps22hb.h"
 #include "stdio.h"
 #include "string.h"
 #include "dma.h"
@@ -41,15 +41,15 @@ int main(void)
 
   lsm6dsl_init();
   hts221_init();
-  lps25hb_init();
+  lps22hb_init();
 
   while (1)
   {
 
 	  hts221_get_temp(&temperature);
 	  hts221_get_hum(&humidity);
-	  lps25hb_get_press(&pressure);
-	  lps25hb_get_rel_height(&rel_height);
+	  lps22hb_get_press(&pressure);
+	  lps22hb_get_rel_height(&rel_height);
 	  memset(formated_text, '\0', sizeof(formated_text));
 	  sprintf(formated_text, "teplota [°C]: %0.1f,  rel vlhkost [%%]: %d,  tlak vzduchu [hPa]: %.2f,  rel_h [m]: %.2f \r", temperature, humidity, pressure, rel_height);
 	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
