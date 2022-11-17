@@ -49,16 +49,10 @@ int main(void)
 	  hts221_get_temp(&temperature);
 	  hts221_get_hum(&humidity);
 	  lps25hb_get_press(&pressure);
-//	  lps25hb_get_temp(&ttt);
 	  memset(formated_text, '\0', sizeof(formated_text));
-	  sprintf(formated_text, "teplota [°C]: %0.1f, rel vlhkost [%%]: %d, tlak vzduchu [hPa]: %.12f\r", temperature, humidity, pressure);
+	  sprintf(formated_text, "teplota [°C]: %0.1f, rel vlhkost [%%]: %d, tlak vzduchu [hPa]: %.2f\r", temperature, humidity, pressure);
 	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 
-	  //os			   x      y        z
-//	  lsm6dsl_get_acc(acc, (acc+1), (acc+2)); //volanie hlavnej funkcie
-//	  memset(formated_text, '\0', sizeof(formated_text));
-//	  sprintf(formated_text, "%0.4f,%0.4f,%0.4f\r", acc[0], acc[1], acc[2]);
-//	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 	  LL_mDelay(10);
   }
 }
