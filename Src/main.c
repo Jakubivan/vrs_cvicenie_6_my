@@ -17,8 +17,9 @@
 
 float mag[3], acc[3];
 float temperature;
+float pressure;
 int humidity;
-char formated_text[60];
+char formated_text[70];
 
 void SystemClock_Config(void);
 
@@ -44,10 +45,11 @@ int main(void)
   while (1)
   {
 
-	  hts221_get_temp(&temperature); //volanie hlavnej funkcie
-	  hts221_get_hum(&humidity); //volanie hlavnej funkcie
+	  hts221_get_temp(&temperature);
+	  hts221_get_hum(&humidity);
+	  lps25hb_get_press(&pressure);
 	  memset(formated_text, '\0', sizeof(formated_text));
-	  sprintf(formated_text, "teplota [°C]: %0.1f, rel vlhkost [%%]: %d\r", temperature, humidity);
+	  sprintf(formated_text, "teplota [°C]: %0.1f, rel vlhkost [%%]: %d, tlak vzduchu [hPa]: %.12f\r", temperature, humidity, pressure);
 	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 
 	  //os			   x      y        z

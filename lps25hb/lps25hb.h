@@ -13,12 +13,12 @@
 
 
 #define 	LPS25HB_DEVICE_ADDRESS1				0xB9 	//adresa1 read SLAVE
-#define 	LPS25HB_DEVICE_ADDRESS2				0xBB 	//adresa1 read SLAVE
+#define 	LPS25HB_DEVICE_ADDRESS2				0xBB 	//adresa2 read SLAVE
 
-#define 	LPS25HB_WHO_AM_I_VALUE				0xBD
+#define 	LPS25HB_WHO_AM_I_VALUE				0xB1
 #define 	LPS25HB_WHO_AM_I_ADDRESS			0x0F
 
-#define 	LPS25HB_ADDRESS_CTRL1				0x20	// kontrolny register, konfiguracia slave zariadenia
+#define 	LPS25HB_ADDRESS_CTRL1				0x10	// kontrolny register, konfiguracia slave zariadenia
 
 
 #define 	LPS25HB_ADDRESS_PRESS_OUT_XL		0x28 // prvy register
