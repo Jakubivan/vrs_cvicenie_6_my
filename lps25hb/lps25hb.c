@@ -24,6 +24,8 @@
 #include "lps25hb.h"
 
 uint8_t addres_lsp25hb = LPS25HB_DEVICE_ADDRESS1;
+float p0;
+float p1;
 
 uint8_t lps25hb_read_byte(uint8_t reg_addr)
 {
@@ -48,25 +50,27 @@ void lps25hb_readArray(uint8_t * data, uint8_t reg, uint8_t length)
 
 void lps25hb_get_press(float* press_out)
 {
-	// T_OUT
+	// PRESS_OUT
 	uint8_t press_out_array[3];
+	int32_t press_tmp;
 	press_out_array[0] = lps25hb_read_byte(LPS25HB_ADDRESS_PRESS_OUT_XL);
 	press_out_array[1] = lps25hb_read_byte(LPS25HB_ADDRESS_PRESS_OUT_L);
 	press_out_array[2] = lps25hb_read_byte(LPS25HB_ADDRESS_PRESS_OUT_H);
 	// vratenie hodnoty
-	*press_out = ((press_out_array[2] << 16) | (press_out_array[1] << 8) | press_out_array[0])/4096.0;
-
+	press_tmp = (press_out_array[2] << 16) | (press_out_array[1] << 8) | press_out_array[0];
+	*press_out = (float)press_tmp/4096;
 }
 
 void lps25hb_get_temp(float* lps25hb_temp)
 {
-
+	uint8_t lps25hb_temp_array[2];
+	lps25hb_temp_array[0] = lps25hb_read_byte(LPS25HB_ADDRESS_TEMP_OUT_L);
+	lps25hb_temp_array[1] = lps25hb_read_byte(LPS25HB_ADDRESS_TEMP_OUT_H);
+	*lps25hb_temp = (lps25hb_temp_array[1] << 8) | lps25hb_temp_array[0];
 }
-
 
 uint8_t lps25hb_init(void)
 {
-	//TODO val nesedi s who_am_i_value
 	uint8_t status = 1;
 
 	LL_mDelay(100);
@@ -93,8 +97,12 @@ uint8_t lps25hb_init(void)
 
 	// device config
 	uint8_t ctrl1 = lps25hb_read_byte(LPS25HB_ADDRESS_CTRL1);
-	ctrl1 &= 0x18;
+	ctrl1 &= ~0xFF;
+	ctrl1 |=  0x18;
 	lps25hb_write_byte(LPS25HB_ADDRESS_CTRL1, ctrl1);
+
+	// ziskanie pociatocneho tlaku p0 pri inicializacii zariadenia
+	lps25hb_get_press(&p0);
 
 	return status;
 }
