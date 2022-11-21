@@ -32,7 +32,7 @@
 #define CHAR_BUFF_SIZE	30
 
 float mag[3], acc[3], gyro[3];
-char formated_text[30];
+char formated_text[80];
 
 void SystemClock_Config(void);
 
@@ -60,7 +60,8 @@ int main(void)
 	  lsm6dsl_get_acc(acc, (acc+1), (acc+2)); //volanie hlavnej funkcie
 	  lsm6dsl_get_gyro(gyro,(gyro+1), (gyro+2));
 	  memset(formated_text, '\0', sizeof(formated_text));
-	  sprintf(formated_text, "%0.4f,%0.4f,%0.4f\r", gyro[0], gyro[1], gyro[2]);
+	  sprintf(formated_text, "%0.4f, %0.4f, %0.4f, %0.4f, %0.4f, %0.4f\r", acc[0], acc[1], acc[2], gyro[0], gyro[1], gyro[2]);
+//	  sprintf(formated_text, "%0.4f,%0.4f,%0.4f\r", gyro[0], gyro[1], gyro[2]);
 //	  sprintf(formated_text, "%0.4f,%0.4f,%0.4f\r", acc[0], acc[1], acc[2]);
 	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 	  LL_mDelay(10);
