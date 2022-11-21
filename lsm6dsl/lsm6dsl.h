@@ -33,5 +33,6 @@
 
 uint8_t lsm6dsl_init(void);
 void lsm6dsl_get_acc(float* x, float * y, float * z);
+void lsm6dsl_get_gyro(float* roll, float* pitch, float* yaw);
 uint8_t lsm6dsl_read_byte(uint8_t reg_addr);
 void lsm6dsl_write_byte(uint8_t reg_addr, uint8_t value);

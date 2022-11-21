@@ -5,7 +5,7 @@
  *      Author: Stancoj
  */
 
-#include "../lsm6dsl/lsm6dsl.h"
+#include "lsm6dsl.h"
 
 uint8_t addres = LSM6DSL_DEVICE_ADDRESS_0;
 
@@ -44,6 +44,22 @@ void lsm6dsl_get_acc(float* x, float* y, float* z)
 	*x = (xx >> 4) / 1000.0f;
 	*y = (yy >> 4) / 1000.0f;
 	*z = (zz >> 4) / 1000.0f;
+}
+
+void lsm6dsl_get_gyro(float* roll, float* pitch, float* yaw)
+{
+	uint8_t data[6];
+	int16_t xx, yy, zz;
+
+	lsm6dsl_readArray(data, LSM6DSL_ADDRESS_GYROX, 6);
+
+	xx = ((uint16_t)data[1]) << 8 | data[0];
+	yy = ((uint16_t)data[3]) << 8 | data[2];
+	zz = ((uint16_t)data[5]) << 8 | data[4];
+
+	*roll = (xx >> 4) / 1000.0f;
+	*pitch = (yy >> 4) / 1000.0f;
+	*yaw = (zz >> 4) / 1000.0f;
 }
 
 
