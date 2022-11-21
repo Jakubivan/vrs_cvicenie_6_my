@@ -24,10 +24,10 @@
 #include "gpio.h"
 #include "usart.h"
 #include "lis3mdltr.h"
-#include "lsm6dsl.h"
 #include "stdio.h"
 #include "string.h"
 #include "dma.h"
+#include "../lsm6dsl/lsm6dsl.h"
 
 #define CHAR_BUFF_SIZE	30
 

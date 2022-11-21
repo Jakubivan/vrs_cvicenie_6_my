@@ -5,7 +5,7 @@
  *      Author: Stancoj
  */
 
-#include "lsm6dsl.h"
+#include "../lsm6dsl/lsm6dsl.h"
 
 uint8_t addres = LSM6DSL_DEVICE_ADDRESS_0;
 
