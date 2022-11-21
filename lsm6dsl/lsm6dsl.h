@@ -15,11 +15,19 @@
 #define 	LSM6DSL_WHO_AM_I_VALUE					0x6A
 #define 	LSM6DSL_WHO_AM_I_ADDRESS				0x0F
 
-#define 	LSM6DSL_ADDRESS_CTRL1					0x10	// kontrolny register, konfiguracia slave zariadenia
-
+// acc
+#define 	LSM6DSL_ADDRESS_CTRL1					0x10	// kontrolny register, acc
 #define 	LSM6DSL_ADDRESS_ACCX					0x28	//adresa acc X
 #define 	LSM6DSL_ADDRESS_ACCY					0x2A	//adresa acc Y
 #define 	LSM6DSL_ADDRESS_ACCZ					0x2C	//adresa acc Z
+
+// gyro
+#define 	LSM6DSL_ADDRESS_CTRL2					0x11	// kontrolny register, gyro
+#define 	LSM6DSL_ADDRESS_GYROX					0x22	// adresa gyroL X
+#define 	LSM6DSL_ADDRESS_GYROY					0x24	// adresa gyroL Y
+#define 	LSM6DSL_ADDRESS_GYROZ					0x26	// adresa gyroL Z
+
+
 
 #define 	LSM6DSL_ADDRESS_TEMP_L					0x20	// adresa teplota
 
