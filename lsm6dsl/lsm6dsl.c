@@ -97,7 +97,8 @@ uint8_t lsm6dsl_init(void)
 
 	//gyro device config
 	uint8_t ctrl2 = lsm6dsl_read_byte(LSM6DSL_ADDRESS_CTRL2);
-	ctrl2 &= 0x70;
+	ctrl2 &= ~0xFF;
+	ctrl2 |= 0x70;
 	lsm6dsl_write_byte(LSM6DSL_ADDRESS_CTRL2, ctrl2);
 	return status;
 }
